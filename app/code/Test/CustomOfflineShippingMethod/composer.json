@@ -1,0 +1,9 @@
+{
+    "name": "test/custom-offline-shipping-method",
+    "description": "Custom offline shipping method module",
+    "type": "magento2-module",
+    "license": "MIT",
+    "minimum-stability": "alpha",
+    "require": {},
+    "version": "1.0.0"
+}
