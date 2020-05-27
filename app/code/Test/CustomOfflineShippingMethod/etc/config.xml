@@ -4,8 +4,8 @@
         <carriers>
             <customofflineshippingmethod>
                 <active>1</active>
-                <title>Title</title>
-                <name>Method Name</name>
+                <title>Custom Shipping Title</title>
+                <name>Custom Shipping Name</name>
                 <shipping_cost>10</shipping_cost>
                 <sallowspecific>0</sallowspecific>
                 <sort_order>15</sort_order>
