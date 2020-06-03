@@ -1,0 +1,9 @@
+{
+    "name": "test/customer-vouchers",
+    "description": "Customer vouchers module",
+    "type": "magento2-module",
+    "license": "MIT",
+    "minimum-stability": "alpha",
+    "require": {},
+    "version": "1.0.0"
+}
