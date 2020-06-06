@@ -152,7 +152,7 @@ class VoucherManagement implements VoucherManagementInterface
         $voucherStatus->setStatusCode($code);
         $this->voucherStatusResource->save($voucherStatus);
 
-        return $voucher->getId();
+        return $voucherStatus->getId();
     }
 
     /**
