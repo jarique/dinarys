@@ -15,19 +15,19 @@
     <route method="POST" url="/V1/customer-vouchers/voucher/new">
         <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="createVoucher"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Magento_Backend::admin"/>
         </resources>
     </route>
     <route method="DELETE" url="/V1/customer-vouchers/voucher/:id">
         <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="deleteVoucher"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Magento_Backend::admin"/>
         </resources>
     </route>
     <route method="POST" url="/V1/customer-vouchers/voucher-status/new">
         <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="createVoucherStatus"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Magento_Backend::admin"/>
         </resources>
     </route>
     <route method="GET" url="/V1/customer-vouchers/voucher-statuses">
@@ -39,7 +39,7 @@
     <route method="DELETE" url="/V1/customer-vouchers/voucher-status/:id">
         <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="deleteVoucherStatus"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Magento_Backend::admin"/>
         </resources>
     </route>
 </routes>
