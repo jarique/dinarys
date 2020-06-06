@@ -2,7 +2,7 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="voucher_status">
-        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" comment="Entity id"/>
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity id"/>
         <column xsi:type="varchar" name="status_code" nullable="false" length="255" comment="Status code"/>
         <column xsi:type="timestamp" name="created_at" padding="10" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created at"/>
         <column xsi:type="timestamp" name="updated_at" padding="10" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated at"/>
@@ -14,7 +14,7 @@
         </constraint>
     </table>
     <table name="voucher">
-        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" comment="Entity id"/>
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity id"/>
         <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" comment="Customer id"/>
         <column xsi:type="int" name="status_id" padding="10" unsigned="true" nullable="false" comment="Status id"/>
         <column xsi:type="varchar" name="voucher_code" nullable="false" length="255" comment="Voucher code"/>

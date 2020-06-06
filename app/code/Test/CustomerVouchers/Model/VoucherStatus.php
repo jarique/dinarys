@@ -19,8 +19,22 @@ class VoucherStatus extends AbstractModel implements IdentityInterface
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
-    public function getDefaultValues()
+    /**
+     * @return string
+     */
+    public function getStatusCode()
     {
-        return 'voucher_status';
+        return $this->getData('status_code');
+    }
+
+    /**
+     * @param string $code
+     * @return $this
+     */
+    public function setStatusCode(string $code)
+    {
+        $this->setData('status_code', $code);
+
+        return $this;
     }
 }

@@ -12,4 +12,26 @@ class Collection extends AbstractCollection
     {
         $this->_init('Test\CustomerVouchers\Model\Voucher', 'Test\CustomerVouchers\Model\ResourceModel\Voucher');
     }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function filterById(int $id)
+    {
+        $this->addFieldToFilter('entity_id', $id);
+
+        return $this;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function filterByCustomerId(int $id)
+    {
+        $this->addFieldToFilter('customer_id', $id);
+
+        return $this;
+    }
 }

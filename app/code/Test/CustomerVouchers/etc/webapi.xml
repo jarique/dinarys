@@ -1,7 +1,43 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route method="GET" url="/V1/customer/vouchers/:param">
-        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="create"/>
+    <route method="GET" url="/V1/customer-vouchers/vouchers">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="getVouchers"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/customer-vouchers/voucher/:id">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="getVouchersByCustomerId"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/customer-vouchers/voucher/new">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="createVoucher"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/V1/customer-vouchers/voucher/:id">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="deleteVoucher"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/customer-vouchers/voucher-status/new">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="createVoucherStatus"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/customer-vouchers/voucher-statuses">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="getVoucherStatuses"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/V1/customer-vouchers/voucher-status/:id">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="deleteVoucherStatus"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
