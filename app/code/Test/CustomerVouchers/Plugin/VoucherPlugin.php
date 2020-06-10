@@ -2,6 +2,7 @@
 
 namespace Test\CustomerVouchers\Plugin;
 
+use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Group;
 use Magento\Customer\Model\ResourceModel\Group\CollectionFactory as GroupCollectionFactory;
@@ -39,7 +40,7 @@ class VoucherPlugin
             ->addFieldToFilter('customer_group_code', 'Privileged Customers')
             ->getFirstItem();
 
-        /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
+        /** @var CustomerInterface $customer */
         $customer = $this->customerRepositoryInterface->getById($customerId);
         if ($customer->getGroupId() != $group->getId()) {
             throw new LocalizedException(__('Customer isn\'t in a privileged group'));
