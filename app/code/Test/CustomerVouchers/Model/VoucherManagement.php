@@ -3,11 +3,13 @@
 namespace Test\CustomerVouchers\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Test\CustomerVouchers\Api\VoucherManagementInterface;
+use Test\CustomerVouchers\Api\Data\VoucherInterfaceFactory as VoucherFactory;
 use Test\CustomerVouchers\Model\ResourceModel\Voucher as VoucherResource;
 use Test\CustomerVouchers\Model\ResourceModel\Voucher\CollectionFactory as VoucherCollectionFactory;
 use Test\CustomerVouchers\Model\ResourceModel\VoucherStatus as VoucherStatusResource;
@@ -55,7 +57,7 @@ class VoucherManagement implements VoucherManagementInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getVouchers()
     {
@@ -65,8 +67,7 @@ class VoucherManagement implements VoucherManagementInterface
     }
 
     /**
-     * @param int $id
-     * @return array
+     * {@inheritdoc}
      */
     public function getVouchersByCustomerId(int $id)
     {
@@ -77,17 +78,15 @@ class VoucherManagement implements VoucherManagementInterface
     }
 
     /**
-     * @param int $customerId
-     * @param int $statusId
-     * @param string $code
-     * @return int
+     * {@inheritdoc}
      * @throws AlreadyExistsException
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
     public function createVoucher(int $customerId, int $statusId, string $code)
     {
-        $this->customerRepositoryInterface->getById($customerId);
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepositoryInterface->getById($customerId);
 
         /** @var VoucherStatus $voucherStatus */
         $voucherStatus = $this->voucherStatusFactory->create();
@@ -98,17 +97,16 @@ class VoucherManagement implements VoucherManagementInterface
 
         /** @var Voucher $voucher */
         $voucher = $this->voucherFactory->create();
-        $voucher->setCustomerId($customerId);
         $voucher->setStatusId($statusId);
         $voucher->setVoucherCode($code);
+        $voucher->getExtensionAttributes()->setCustomer($customer);
         $this->voucherResource->save($voucher);
 
         return $voucher->getId();
     }
 
     /**
-     * @param int $id
-     * @return bool
+     * {@inheritdoc}
      * @throws NoSuchEntityException
      * @throws CouldNotDeleteException
      */
@@ -131,7 +129,7 @@ class VoucherManagement implements VoucherManagementInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getVoucherStatuses()
     {
@@ -141,8 +139,7 @@ class VoucherManagement implements VoucherManagementInterface
     }
 
     /**
-     * @param string $code
-     * @return int
+     * {@inheritdoc}
      * @throws AlreadyExistsException
      */
     public function createVoucherStatus(string $code)
@@ -156,8 +153,7 @@ class VoucherManagement implements VoucherManagementInterface
     }
 
     /**
-     * @param int $id
-     * @return bool
+     * {@inheritdoc}
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      */

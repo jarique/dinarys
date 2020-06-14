@@ -2,10 +2,11 @@
 
 namespace Test\CustomerVouchers\Model;
 
+use Magento\Framework\Model\AbstractExtensibleModel;
 use Magento\Framework\DataObject\IdentityInterface;
-use Magento\Framework\Model\AbstractModel;
+use Test\CustomerVouchers\Api\Data\VoucherInterface;
 
-class Voucher extends AbstractModel implements IdentityInterface
+class Voucher extends AbstractExtensibleModel implements IdentityInterface, VoucherInterface
 {
     const CACHE_TAG = 'test_customer_vouchers_voucher';
 
@@ -20,7 +21,7 @@ class Voucher extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getCustomerId()
     {
@@ -28,8 +29,7 @@ class Voucher extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @param int $customerId
-     * @return $this
+     * {@inheritdoc}
      */
     public function setCustomerId(int $customerId)
     {
@@ -39,7 +39,7 @@ class Voucher extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getStatusId()
     {
@@ -47,8 +47,7 @@ class Voucher extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @param int $statusId
-     * @return $this
+     * {@inheritdoc}
      */
     public function setStatusId(int $statusId)
     {
@@ -58,7 +57,7 @@ class Voucher extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getVoucherCode()
     {
@@ -66,13 +65,30 @@ class Voucher extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @param string $code
-     * @return $this
+     * {@inheritdoc}
      */
     public function setVoucherCode(string $code)
     {
         $this->setData('voucher_code', $code);
 
         return $this;
+    }
+
+    /**
+     * @return \Test\CustomerVouchers\Api\Data\VoucherExtensionInterface|null
+     */
+    public function getExtensionAttributes()
+    {
+        return $this->_getExtensionAttributes();
+    }
+
+    /**
+     * @param \Test\CustomerVouchers\Api\Data\VoucherExtensionInterface $extensionAttributes
+     * @return $this
+     */
+    public function setExtensionAttributes(
+        \Test\CustomerVouchers\Api\Data\VoucherExtensionInterface $extensionAttributes
+    ) {
+        return $this->_setExtensionAttributes($extensionAttributes);
     }
 }
