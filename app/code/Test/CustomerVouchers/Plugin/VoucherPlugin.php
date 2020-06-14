@@ -2,13 +2,13 @@
 
 namespace Test\CustomerVouchers\Plugin;
 
-use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Group;
 use Magento\Customer\Model\ResourceModel\Group\CollectionFactory as GroupCollectionFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Test\CustomerVouchers\Model\Voucher as Subject;
+use Test\CustomerVouchers\Model\Voucher;
 
 class VoucherPlugin
 {
@@ -27,13 +27,13 @@ class VoucherPlugin
     }
 
     /**
-     * @param Subject $subject
+     * @param Voucher $subject
      * @param int $customerId
      * @return int
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
-    public function beforeSetCustomerId(Subject $subject, int $customerId)
+    public function beforeSetCustomerId(Voucher $subject, int $customerId)
     {
         /** @var Group $group */
         $group = $this->groupCollectionFactory->create()
@@ -47,5 +47,29 @@ class VoucherPlugin
         }
 
         return $customerId;
+    }
+
+    /**
+     * @param Voucher $subject
+     */
+    public function beforeBeforeSave(Voucher $subject)
+    {
+        $subject->setCustomerId($subject->getExtensionAttributes()->getCustomer()->getId());
+    }
+
+    /**
+     * @param Voucher $subject
+     * @return Voucher
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function afterAfterLoad(Voucher $subject)
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepositoryInterface->getById($subject->getCustomerId());
+
+        $subject->getExtensionAttributes()->setCustomer($customer);
+
+        return $subject;
     }
 }
