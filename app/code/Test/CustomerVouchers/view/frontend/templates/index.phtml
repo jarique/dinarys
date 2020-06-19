@@ -1,0 +1,24 @@
+<h3>Voucher statuses</h3>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Created at</th>
+        <th colspan="2">Action</th>
+    </tr>
+
+    <?php $collection = $block->getResult(); ?>
+
+    <?php foreach ($collection as $item): ?>
+        <tr>
+            <td><?= $item->getData('entity_id'); ?></td>
+            <td><?= $item->getData('status_code'); ?></td>
+            <td><?= $item->getData('created_at'); ?></td>
+            <td><a href="<?= $block->getUrl('customervouchers/voucher_status/edit') . 'id/' . $item->getData('entity_id'); ?>" class="action primary">Edit</a></td>
+            <td><a href="<?= $block->getUrl('customervouchers/voucher_status/delete') . '?id=' . $item->getData('entity_id'); ?>" class="action primary">Delete</a></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<a href="<?= $block->getUrl('customervouchers/voucher_status/insert'); ?>" class="action primary">Add status</a>
