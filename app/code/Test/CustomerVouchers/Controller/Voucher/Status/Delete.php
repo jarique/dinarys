@@ -2,8 +2,11 @@
 
 namespace Test\CustomerVouchers\Controller\Voucher\Status;
 
-class Save extends \Magento\Framework\App\Action\Action
+class Delete extends \Magento\Framework\App\Action\Action
 {
+    /** @var \Magento\Framework\App\Request\Http */
+    private $request;
+
     /** @var \Test\CustomerVouchers\Model\VoucherStatusFactory */
     private $voucherStatusFactory;
 
@@ -12,9 +15,11 @@ class Save extends \Magento\Framework\App\Action\Action
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\App\Request\Http $request,
         \Test\CustomerVouchers\Model\VoucherStatusFactory $voucherStatusFactory,
         \Test\CustomerVouchers\Model\ResourceModel\VoucherStatus $voucherStatusResource
     ) {
+        $this->request = $request;
         $this->voucherStatusFactory = $voucherStatusFactory;
         $this->voucherStatusResource = $voucherStatusResource;
 
@@ -23,26 +28,18 @@ class Save extends \Magento\Framework\App\Action\Action
 
     /**
      * @return \Magento\Framework\App\ResponseInterface
-     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     * @throws \Exception
      */
     public function execute()
     {
-        if ($this->getRequest()->isPost()) {
-            $input = $this->getRequest()->getPostValue();
-            $voucherStatus = $this->voucherStatusFactory->create();
+        $id = $this->request->getParam('id');
 
-            if (!empty($input['id'])) {
-                $this->voucherStatusResource->load($voucherStatus, $input['id']);
-            }
-            if (!empty($input['status_code'])) {
-                $voucherStatus->setStatusCode($input['status_code']);
-                $this->voucherStatusResource->save($voucherStatus);
+        /** @var \Test\CustomerVouchers\Model\VoucherStatus $voucherStatus */
+        $voucherStatus = $this->voucherStatusFactory->create();
+        $this->voucherStatusResource->load($voucherStatus, $id);
+        $this->voucherStatusResource->delete($voucherStatus);
 
-                $this->messageManager->addSuccessMessage('Voucher status saved!');
-            } else {
-                $this->messageManager->addErrorMessage('Something went wrong!');
-            }
-        }
+        $this->messageManager->addSuccessMessage('Voucher status deleted!');
 
         return $this->_redirect('customervouchers/voucher_status/index');
     }

@@ -12,6 +12,14 @@ class Insert extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * @return null
+     */
+    public function getRecord()
+    {
+        return null;
+    }
+
+    /**
      * @return string
      */
     public function getFormAction()
