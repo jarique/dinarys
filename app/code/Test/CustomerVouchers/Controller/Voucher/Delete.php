@@ -23,7 +23,7 @@ class Delete extends \Magento\Framework\App\Action\Action
         $this->voucherFactory = $voucherFactory;
         $this->voucherResource = $voucherResource;
 
-        return parent::__construct($context);
+        parent::__construct($context);
     }
 
     /**

@@ -18,7 +18,7 @@ class Save extends \Magento\Framework\App\Action\Action
         $this->voucherStatusFactory = $voucherStatusFactory;
         $this->voucherStatusResource = $voucherStatusResource;
 
-        return parent::__construct($context);
+        parent::__construct($context);
     }
 
     /**

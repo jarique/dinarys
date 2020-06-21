@@ -13,7 +13,7 @@ class Insert extends \Magento\Framework\App\Action\Action
     ) {
         $this->resultPageFactory = $resultPageFactory;
 
-        return parent::__construct($context);
+        parent::__construct($context);
     }
 
     /**

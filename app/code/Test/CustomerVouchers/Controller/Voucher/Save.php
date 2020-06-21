@@ -33,7 +33,7 @@ class Save extends \Magento\Framework\App\Action\Action
         $this->voucherStatusResource = $voucherStatusResource;
         $this->customerRepositoryInterface = $customerRepositoryInterface;
 
-        return parent::__construct($context);
+        parent::__construct($context);
     }
 
     /**
