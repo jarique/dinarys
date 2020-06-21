@@ -10,17 +10,15 @@
         <th colspan="2">Action</th>
     </tr>
 
-    <?php $collection = $block->getResult(); ?>
-
-    <?php foreach ($collection as $item): ?>
+    <?php foreach ($block->getResult() as $status): ?>
         <tr>
-            <td><?= $item->getData('entity_id'); ?></td>
-            <td><?= $item->getData('customer_id'); ?></td>
-            <td><?= $item->getData('status_code'); ?></td>
-            <td><?= $item->getData('voucher_code'); ?></td>
-            <td><?= $item->getData('created_at'); ?></td>
-            <td><a href="<?= $block->getUrl('customervouchers/voucher/edit') . 'id/' . $item->getData('entity_id'); ?>" class="action primary">Edit</a></td>
-            <td><a href="<?= $block->getUrl('customervouchers/voucher/delete') . '?id=' . $item->getData('entity_id'); ?>" class="action primary">Delete</a></td>
+            <td><?= $status->getData('entity_id'); ?></td>
+            <td><?= $status->getData('customer_id'); ?></td>
+            <td><?= $status->getData('status_code'); ?></td>
+            <td><?= $status->getData('voucher_code'); ?></td>
+            <td><?= $status->getData('created_at'); ?></td>
+            <td><a href="<?= $block->getUrl('customervouchers/voucher/edit') . 'id/' . $status->getData('entity_id'); ?>" class="action primary">Edit</a></td>
+            <td><a href="<?= $block->getUrl('customervouchers/voucher/delete') . '?id=' . $status->getData('entity_id'); ?>" class="action primary">Delete</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

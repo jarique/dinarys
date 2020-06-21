@@ -8,7 +8,7 @@ class Insert extends \Magento\Framework\View\Element\Template
         \Magento\Framework\View\Element\Template\Context $context,
         array $data = []
     ) {
-        return parent::__construct($context, $data);
+        parent::__construct($context, $data);
     }
 
     /**

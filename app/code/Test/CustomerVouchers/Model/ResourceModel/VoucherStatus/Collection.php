@@ -23,4 +23,14 @@ class Collection extends AbstractCollection
 
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function selectStatusCode()
+    {
+        $this->addFieldToSelect('status_code');
+
+        return $this;
+    }
 }

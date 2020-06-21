@@ -20,11 +20,11 @@ class Edit extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Registry $coreRegistry,
         array $data = []
     ) {
+        parent::__construct($context, $data);
+
         $this->voucherStatusFactory = $voucherStatusFactory;
         $this->voucherStatusResource = $voucherStatusResource;
         $this->coreRegistry = $coreRegistry;
-
-        return parent::__construct($context, $data);
     }
 
     /**
