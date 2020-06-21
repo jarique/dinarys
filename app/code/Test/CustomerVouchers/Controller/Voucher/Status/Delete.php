@@ -34,7 +34,6 @@ class Delete extends \Magento\Framework\App\Action\Action
     {
         $id = $this->request->getParam('id');
 
-        /** @var \Test\CustomerVouchers\Model\VoucherStatus $voucherStatus */
         $voucherStatus = $this->voucherStatusFactory->create();
         $this->voucherStatusResource->load($voucherStatus, $id);
         $this->voucherStatusResource->delete($voucherStatus);

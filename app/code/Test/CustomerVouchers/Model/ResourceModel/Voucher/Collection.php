@@ -34,4 +34,24 @@ class Collection extends AbstractCollection
 
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function getWithJoinedStatus()
+    {
+        $this->join(
+            ['voucher_status' => 'voucher_status'],
+            'main_table.status_id = voucher_status.entity_id',
+            [
+            'main_table.entity_id',
+            'main_table.customer_id',
+            'voucher_status.status_code',
+            'main_table.voucher_code',
+            'main_table.created_at'
+            ]
+        );
+
+        return $this;
+    }
 }
