@@ -1,0 +1,26 @@
+<h3>Vouchers</h3>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Customer</th>
+        <th>Status</th>
+        <th>Code</th>
+        <th>Created at</th>
+        <th colspan="2">Action</th>
+    </tr>
+
+    <?php foreach ($block->getResult() as $status): ?>
+        <tr>
+            <td><?= $status->getData('entity_id'); ?></td>
+            <td><?= $status->getData('customer_id'); ?></td>
+            <td><?= $status->getData('status_code'); ?></td>
+            <td><?= $status->getData('voucher_code'); ?></td>
+            <td><?= $status->getData('created_at'); ?></td>
+            <td><a href="<?= $block->getUrl('customervouchers/voucher/edit') . 'id/' . $status->getData('entity_id'); ?>" class="action primary">Edit</a></td>
+            <td><a href="<?= $block->getUrl('customervouchers/voucher/delete') . '?id=' . $status->getData('entity_id'); ?>" class="action primary">Delete</a></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<a href="<?= $block->getUrl('customervouchers/voucher/insert'); ?>" class="action primary">Add</a>

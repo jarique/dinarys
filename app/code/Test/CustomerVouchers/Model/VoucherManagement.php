@@ -144,7 +144,7 @@ class VoucherManagement implements VoucherManagementInterface
      */
     public function createVoucherStatus(string $code)
     {
-        /** @var voucherStatus $voucher */
+        /** @var VoucherStatus $voucherStatus */
         $voucherStatus = $this->voucherStatusFactory->create();
         $voucherStatus->setStatusCode($code);
         $this->voucherStatusResource->save($voucherStatus);

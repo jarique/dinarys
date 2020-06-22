@@ -1,0 +1,20 @@
+<h3>Add voucher status</h3>
+
+<br /><br />
+
+<?php $record = $block->getRecord(); ?>
+
+<form action="<?= $block->getFormAction(); ?>" method="post">
+    <label for="code">Status code</label>
+    <input type="text" name="status_code" id="code" value="<?php isset($record) && print $record->getStatusCode(); ?>" />
+
+    <input type="hidden" name="id" value="<?php isset($record) && print $record->getId(); ?>" />
+
+    <br /><br />
+
+    <input type="submit" value="Add" class="action primary" />
+</form>
+
+<br />
+
+<a href="<?= $block->getUrl('customervouchers/voucher_status/index'); ?>" class="action primary">Back</a>

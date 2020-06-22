@@ -1,0 +1,50 @@
+<h3>Add voucher</h3>
+
+<br /><br />
+
+<?php $record = $block->getRecord(); ?>
+
+<form action="<?= $block->getFormAction(); ?>" method="post">
+    <label for="customer">Voucher customer</label>
+    <select name="voucher_customer" id="customer">
+        <?php foreach ($block->getCustomers() as $customer): ?>
+
+            <?php if (isset($record) && $record->getCustomerId() == $customer->getData('entity_id')): ?>
+                <option selected value="<?= $customer->getData('entity_id'); ?>"><?= $customer->getData('entity_id'); ?></option>
+            <?php else: ?>
+                <option value="<?= $customer->getData('entity_id'); ?>"><?= $customer->getData('entity_id'); ?></option>
+            <?php endif; ?>
+
+        <?php endforeach; ?>
+    </select>
+
+    <br /><br />
+
+    <label for="status">Voucher status</label>
+    <select name="voucher_status" id="status">
+        <?php foreach ($block->getStatuses() as $status): ?>
+
+            <?php if (isset($record) && $record->getStatusId() == $status->getData('entity_id')): ?>
+                <option selected value="<?= $status->getData('status_code'); ?>"><?= $status->getData('status_code'); ?></option>
+            <?php else: ?>
+                <option value="<?= $status->getData('status_code'); ?>"><?= $status->getData('status_code'); ?></option>
+            <?php endif; ?>
+
+        <?php endforeach; ?>
+    </select>
+
+    <br /><br />
+
+    <label for="code">Voucher code</label>
+    <input type="text" name="voucher_code" id="code" value="<?php isset($record) && print $record->getVoucherCode(); ?>" />
+
+    <input type="hidden" name="id" value="<?php isset($record) && print $record->getId(); ?>" />
+
+    <br /><br />
+
+    <input type="submit" value="Add" class="action primary" />
+</form>
+
+<br />
+
+<a href="<?= $block->getUrl('customervouchers/voucher/index'); ?>" class="action primary">Back</a>
