@@ -6,7 +6,6 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
 {
     const URL_PATH_EDIT = 'customervouchers/voucher/edit';
     const URL_PATH_DELETE = 'customervouchers/voucher/delete';
-    const URL_PATH_VIEW = 'customervouchers/voucher/view';
 
     /** @var \Magento\Framework\UrlInterface */
     private $urlBuilder;
@@ -50,13 +49,6 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
                             'title' => __('Delete "${ $.$data.title }"'),
                             'message' => __('Are you sure you wan\'t to delete a "${ $.$data.title }" record?')
                         ]
-                    ];
-                    $item[$name]['preview'] = [
-                        'href' => $this->urlBuilder->getUrl(
-                            self::URL_PATH_VIEW,
-                            ['id' => $item['entity_id']]
-                        ),
-                        'label' => __('View')
                     ];
                 }
             }

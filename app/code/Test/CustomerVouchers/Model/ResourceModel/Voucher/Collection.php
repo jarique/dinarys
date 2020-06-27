@@ -8,6 +8,11 @@ class Collection extends AbstractCollection
 {
     protected $_idFieldName = 'entity_id';
 
+    /**
+     * @inheritdoc
+     */
+    protected $_map = ['fields' => ['entity_id' => 'main_table.entity_id']];
+
     protected function _construct()
     {
         $this->_init('Test\CustomerVouchers\Model\Voucher', 'Test\CustomerVouchers\Model\ResourceModel\Voucher');
@@ -44,11 +49,11 @@ class Collection extends AbstractCollection
             ['voucher_status' => 'voucher_status'],
             'main_table.status_id = voucher_status.entity_id',
             [
-            'main_table.entity_id',
-            'main_table.customer_id',
-            'voucher_status.status_code',
-            'main_table.voucher_code',
-            'main_table.created_at'
+                'entity_id',
+                'main_table.customer_id',
+                'voucher_status.status_code',
+                'main_table.voucher_code',
+                'main_table.created_at'
             ]
         );
 
