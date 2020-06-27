@@ -4,7 +4,7 @@
         <observer name="voucher_observer" instance="Test\CustomerVouchers\Observer\VoucherObserver" />
     </event>
 
-    <event name="controller_action_predispatch">
-        <observer name="action_observer" instance="Test\CustomerVouchers\Observer\ActionObserver" />
-    </event>
+    <!-- <event name="controller_action_predispatch"> -->
+        <!--<observer name="action_observer" instance="Test\CustomerVouchers\Observer\ActionObserver" /> -->
+    <!-- </event> -->
 </config>
