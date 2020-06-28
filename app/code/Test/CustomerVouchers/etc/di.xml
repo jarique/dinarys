@@ -1,9 +1,24 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Test\CustomerVouchers\Api\VoucherManagementInterface" type="Test\CustomerVouchers\Model\VoucherManagement"/>
-    <preference for="Test\CustomerVouchers\Api\Data\VoucherInterface" type="Test\CustomerVouchers\Model\Voucher"/>
+    <preference for="Test\CustomerVouchers\Api\VoucherManagementInterface" type="Test\CustomerVouchers\Model\VoucherManagement" />
+    <preference for="Test\CustomerVouchers\Api\Data\VoucherInterface" type="Test\CustomerVouchers\Model\Voucher" />
 
     <type name="Test\CustomerVouchers\Model\Voucher">
         <plugin name="voucher_plugin" type="Test\CustomerVouchers\Plugin\VoucherPlugin" sortOrder="1" disabled="false" />
     </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="test_customervouchers_voucher_listing_data_source" xsi:type="string">Test\CustomerVouchers\Model\ResourceModel\Voucher\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Test\CustomerVouchers\Model\ResourceModel\Voucher\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">voucher</argument>
+            <argument name="resourceModel" xsi:type="string">Test\CustomerVouchers\Model\ResourceModel\Voucher</argument>
+        </arguments>
+    </virtualType>
 </config>

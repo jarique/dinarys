@@ -42,4 +42,10 @@
             <resource ref="Magento_Backend::admin"/>
         </resources>
     </route>
+    <route method="GET" url="/V1/customer-vouchers/customer-vouchers">
+        <service class="Test\CustomerVouchers\Api\VoucherManagementInterface" method="getCurrentCustomerVouchers"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
 </routes>

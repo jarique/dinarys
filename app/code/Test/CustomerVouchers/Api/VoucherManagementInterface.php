@@ -20,6 +20,11 @@ interface VoucherManagementInterface
     public function getVouchersByCustomerId(int $id);
 
     /**
+     * @return array
+     */
+    public function getCurrentCustomerVouchers();
+
+    /**
      * @param int $customerId
      * @param int $statusId
      * @param string $code
