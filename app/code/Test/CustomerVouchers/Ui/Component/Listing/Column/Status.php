@@ -34,7 +34,6 @@ class Status extends \Magento\Ui\Component\Listing\Columns\Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $name = $this->getData('name');
 
-                /** @var \Test\CustomerVouchers\Model\VoucherStatus $voucherStatus */
                 $voucherStatus = $this->voucherStatusFactory->create();
                 $this->voucherStatusResource->load($voucherStatus, $item['status_id']);
 

@@ -4,6 +4,7 @@ namespace Test\CustomerVouchers\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Model\Session;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\LocalizedException;
@@ -11,6 +12,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Test\CustomerVouchers\Api\VoucherManagementInterface;
 use Test\CustomerVouchers\Api\Data\VoucherInterfaceFactory as VoucherFactory;
 use Test\CustomerVouchers\Model\ResourceModel\Voucher as VoucherResource;
+use Test\CustomerVouchers\Model\ResourceModel\Voucher\Collection as VoucherCollection;
 use Test\CustomerVouchers\Model\ResourceModel\Voucher\CollectionFactory as VoucherCollectionFactory;
 use Test\CustomerVouchers\Model\ResourceModel\VoucherStatus as VoucherStatusResource;
 use Test\CustomerVouchers\Model\ResourceModel\VoucherStatus\CollectionFactory as VoucherStatusCollectionFactory;
@@ -38,6 +40,9 @@ class VoucherManagement implements VoucherManagementInterface
     /** @var CustomerRepositoryInterface */
     private $customerRepositoryInterface;
 
+    /** @var Session */
+    private $sessionFactory;
+
     public function __construct(
         VoucherFactory $voucherFactory,
         VoucherResource $voucherResource,
@@ -45,7 +50,8 @@ class VoucherManagement implements VoucherManagementInterface
         VoucherStatusResource $voucherStatusResource,
         VoucherCollectionFactory $voucherCollectionFactory,
         VoucherStatusCollectionFactory $voucherStatusCollectionFactory,
-        CustomerRepositoryInterface $customerRepositoryInterface
+        CustomerRepositoryInterface $customerRepositoryInterface,
+        Session $sessionFactory
     ) {
         $this->voucherFactory = $voucherFactory;
         $this->voucherResource = $voucherResource;
@@ -54,6 +60,7 @@ class VoucherManagement implements VoucherManagementInterface
         $this->voucherCollectionFactory = $voucherCollectionFactory;
         $this->voucherStatusCollectionFactory = $voucherStatusCollectionFactory;
         $this->customerRepositoryInterface = $customerRepositoryInterface;
+        $this->sessionFactory = $sessionFactory;
     }
 
     /**
@@ -75,6 +82,13 @@ class VoucherManagement implements VoucherManagementInterface
             ->filterByCustomerId($id)
             ->load()
             ->getData();
+    }
+
+    public function getCurrentCustomerVouchers()
+    {
+        $customerId = $this->sessionFactory->getId();
+
+        return $this->getVoucherCodesByCustomerId($customerId);
     }
 
     /**
@@ -173,5 +187,24 @@ class VoucherManagement implements VoucherManagementInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    private function getVoucherCodesByCustomerId(int $id)
+    {
+        /** @var VoucherCollection $voucherCollection */
+        $voucherCollection = $this->voucherCollectionFactory->create()
+            ->filterByCustomerId($id);
+
+        $codes = [];
+        /** @var Voucher $voucher */
+        foreach ($voucherCollection as $voucher) {
+            $codes[] = $voucher->getVoucherCode();
+        }
+
+        return $codes;
     }
 }

@@ -63,7 +63,7 @@ class Save extends \Magento\Framework\App\Action\Action
                 $voucher->getExtensionAttributes()->setCustomer($customer);
                 $this->voucherResource->save($voucher);
 
-                $this->messageManager->addSuccessMessage('Voucher status saved!');
+                $this->messageManager->addSuccessMessage('Voucher saved!');
             } else {
                 $this->messageManager->addErrorMessage('Something went wrong!');
             }
